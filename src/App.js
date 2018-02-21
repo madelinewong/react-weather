@@ -30,15 +30,21 @@ class App extends Component {
     <form>
       <label> 
         Latitude:
-        <input type="text" 
+        <input type="number" 
+        min="-90"
+        max="90"
         onChange={(e) => this.handleLatChange(e)} 
-        value={this.state.lat}/>
+        value={this.state.lat}
+        required/>
       </label>
       <label>
         Longitude: 
-        <input type="text" 
+        <input type="number" 
+        min="-180"
+        max="180"
         onChange={(e) => this.handleLonChange(e)} 
-        value={this.state.lon}/>
+        value={this.state.lon}
+        required/>
       </label>
       <button type="submit"> Get the Weather! </button>
     </form>
