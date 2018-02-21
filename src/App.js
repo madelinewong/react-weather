@@ -10,6 +10,7 @@ class App extends Component {
     }; 
     this.handleLatChange = this.handleLatChange.bind(this);
     this.handleLonChange = this.handleLonChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleLatChange(e){
@@ -22,12 +23,16 @@ class App extends Component {
       lon: +e.target.value
     })
   }
+  handleSubmit(e){
+  e.preventDefault();
+ console.log('submitting some things and also stuff');
+}
   render() {
     return (
   <div>
     <h1> React Weather </h1>
     <p> Enter your latitude and longitude to get the weather!</p>
-    <form>
+    <form onSubmit={(e) => this.handleSubmit(e)}>
       <label> 
         Latitude:
         <input type="number" 
