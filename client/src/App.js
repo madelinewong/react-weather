@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import "./App.css";
+import { getWeather } from "./services/weather";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       lat: 0,
-      lon: 0
+      lon: 0,
+      currentWeather: {}
     };
     this.handleLatChange = this.handleLatChange.bind(this);
     this.handleLonChange = this.handleLonChange.bind(this);
@@ -26,8 +28,16 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log("submitting some things and also stuff");
-    axios.get('/forecast/0,0')
-    .then(response => console.log(response));
+    getWeather(this.state.lat, this.state.lon)
+      .then(response => {
+        const currentWeather = response.data.currently;
+        this.setState({
+          currentWeather: currentWeather
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
   render() {
     return (
@@ -59,6 +69,7 @@ class App extends Component {
           </label>
           <button type="submit"> Get the Weather! </button>
         </form>
+        <pre>{JSON.stringify(this.state.currentWeather, null, 4)}</pre>
       </div>
     );
   }
