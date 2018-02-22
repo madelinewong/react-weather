@@ -26,6 +26,8 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log("submitting some things and also stuff");
+    axios.get('/forecast/0,0')
+    .then(response => console.log(response));
   }
   render() {
     return (
