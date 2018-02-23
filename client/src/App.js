@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
 import { getWeather } from "./services/weather";
+import { isEmptyObject } from './utils';
 import CurrentWeather from './CurrentWeather';
+
 class App extends Component {
   constructor() {
     super();
@@ -69,7 +71,7 @@ class App extends Component {
           </label>
           <button type="submit"> Get the Weather! </button>
         </form>
-        {Object.keys(this.state.currentWeather).length === 0 ?
+        { isEmptyObject (this.state.currentWeather) ?
            "" : 
            <CurrentWeather {...this.state.currentWeather}/> }
       </div>
